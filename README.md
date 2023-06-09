@@ -56,7 +56,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports sclk]
 ![3](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/5487ed13-d428-4187-bd2d-2647bebc2cd2)
 - The output on the oscilloscope is:
 ![1](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/4f56da2a-69ba-486c-a215-cb115c9e9b1e)
-![2](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/8111ca64-6a7e-4e06-9f53-ad81b3d0b4d0)
+![2](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/6ac67149-ddc9-4614-a527-cc8140ab36d3)
+
+
 
 # References
 - PMOD_DA1_ctrlr: https://staff.fysik.su.se/~silver/digsyst/lab7.html
