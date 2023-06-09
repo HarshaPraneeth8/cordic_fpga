@@ -2,14 +2,9 @@
 module counter (
   input wire DAC_clk,
   input wire done,
-//  input wire [7:0] waveform_output,
   output reg rst,
-//  output reg [7:0] Chan0,
-//  output reg [7:0] Chan1,
-//  output reg [7:0] counter_reg,
   output reg signed [7:0] X_reg
 );
-//  reg [7:0] X_reg;
   reg [7:0] waveform_output_reg;
   reg [7:0] counter_reg;
   reg [7:0] counter_next;
