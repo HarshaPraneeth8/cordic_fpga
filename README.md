@@ -65,3 +65,4 @@ set_property IOSTANDARD LVCMOS33 [get_ports sclk]
 - PMOD DA1: https://digilent.com/reference/pmod/pmodda1/start
 - Nexys 4 DDR: https://digilent.com/reference/programmable-logic/nexys-4-ddr/reference-manual
 - CORDIC: https://ieeexplore.ieee.org/document/5222693
+- Xilinx CORDIC IP: https://docs.xilinx.com/v/u/en-US/pg105-cordic
