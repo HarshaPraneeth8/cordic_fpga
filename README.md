@@ -15,7 +15,17 @@ File descriptions:
 The Vivado design suite IP integrator was exclusively used to integrate all the above modules. 
 - The clocking wizard is used to generate 2 clocks, a 100MHz and a 25MHz clock, and the reset pin is set to active low
 - The following parameters are set for the CORDIC IP:
-  - Functional selection: sin and cis
-  - 
+  - Functional selection: sin and cos
+  - Architectural configuration: parallel
+  - Pipelining mode: maximum
+  - Data format: signed fraction
+  - Phase format: Radians
+  - Input width, output width: 8 bits
+  - Round mode: Truncate
+  - Iterations and precision is set to 0, this allows for automatic selection by the CORDIC IP
+  - Coarse rotation: enabled, enabling this allows the CORDIC IP to perform computations from -pi to +pi
+- An additional constant block of value 1 is used to enable the input of the CORDIC IP
+- The output m_axis_dout_tvalid can be ignored
+- The remaining ports are connected as shown and some are made as external pins
 The blocks, were connected as shown below:
 ![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/381a2aa6-80cc-4642-8a36-a03f61c2d0dc)
