@@ -27,5 +27,29 @@ The Vivado design suite IP integrator was exclusively used to integrate all the 
 - An additional constant block of value 1 is used to enable the input of the CORDIC IP
 - The output m_axis_dout_tvalid can be ignored
 - The remaining ports are connected as shown and some are made as external pins
-The blocks, were connected as shown below:
 ![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/381a2aa6-80cc-4642-8a36-a03f61c2d0dc)
+
+- A HDL Wrapper is created and set as the top module, simulating the block design, the output is as shown:
+![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/84cba5ef-3642-4e58-9e61-d0d071331211)
+
+- The implementation results are as follows:
+  - Less than 1 percent of the total available LUTs were used
+![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/57abfdf7-88dd-4c24-8cd1-13506d4ed361)
+
+- The following constraints can be used to get the output from the JA header:
+
+```python
+set_property PACKAGE_PIN E3 [get_ports clk_100MHz]
+set_property IOSTANDARD LVCMOS33 [get_ports clk_100MHz]
+set_property PACKAGE_PIN J15 [get_ports reset_rtl_0]
+set_property IOSTANDARD LVCMOS33 [get_ports reset_rtl_0]
+set_property PACKAGE_PIN C17 [get_ports sync_0]
+set_property PACKAGE_PIN D18 [get_ports sd00_0]
+set_property PACKAGE_PIN E18 [get_ports sd11_0]
+set_property IOSTANDARD LVCMOS33 [get_ports sd00_0]
+set_property IOSTANDARD LVCMOS33 [get_ports sd11_0]
+set_property IOSTANDARD LVCMOS33 [get_ports sync_0]
+set_property PACKAGE_PIN G17 [get_ports sclk]
+set_property IOSTANDARD LVCMOS33 [get_ports sclk]
+```
+
