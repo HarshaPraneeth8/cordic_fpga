@@ -14,9 +14,9 @@ module counter (
   initial begin
     state <= 0;
     X_reg <= 0;
-    waveform_output_reg <= 0;//01100100;
-    counter_reg <= 0;//01100100;
-    counter_next <= 0;//01100100;
+    waveform_output_reg <= 0; //01100100;
+    counter_reg <= 0; //01100100;
+    counter_next <= 0; //01100100;
   end
 
   // State machine logic
