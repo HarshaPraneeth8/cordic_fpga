@@ -13,7 +13,10 @@ File descriptions:
 - **sep1**: The CORDIC IP core produces a 16 bit output in which the top 8 bits represent the sine output and the bottom 8 bits represent the cosine output, this module is used to split the outputs and send them into the 2 channels of the controller block
 
 The Vivado design suite IP integrator was exclusively used to integrate all the above modules. 
-- The clocking wizard is used to generate 2 clocks, a 100MHz and a 25MHz clock, and the reset pin is set to active low
+- The clocking wizard can be used in one of 2 different ways:
+  - Using MMCM, the desired input clock rate can be set and an output sine wave can be generated, the disadvantage to this approach is that we do not have total control over the output frequency
+  - The second method is to create a clock divider and obtain the required input clock frequency corresponding to the output required.
+- This project follows the second approach, and the required output sine frequency is 50Hz, corresponding to this, the required input frequency is 212.77KHz
 - The following parameters are set for the CORDIC IP:
   - Functional selection: sin and cos
   - Architectural configuration: parallel
@@ -27,14 +30,15 @@ The Vivado design suite IP integrator was exclusively used to integrate all the 
 - An additional constant block of value 1 is used to enable the input of the CORDIC IP
 - The output m_axis_dout_tvalid can be ignored
 - The remaining ports are connected as shown and some are made as external pins
-![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/381a2aa6-80cc-4642-8a36-a03f61c2d0dc)
+- The clocking wizard IP can be completely removed and the clk_div module can be directly connected to the E3 pin of Nexys 4 DDR. I have used the clocking wizard only for the purpose of the RESET function which i tied off to an external port.
+![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/07249eb5-1498-4a8b-99f4-ce4db0bda42e)
 
-- A HDL Wrapper is created and set as the top module, simulating the block design, the output is as shown:
-![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/84cba5ef-3642-4e58-9e61-d0d071331211)
+- A HDL Wrapper is created and set as the top module, simulating the block design (simulation is done by creating multiple external pins), the output is as shown:
+![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/083c7480-a95a-4dc7-b31f-93465c122350)
 
 - The implementation results are as follows:
   - Less than 1 percent of the total available LUTs were used
-![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/57abfdf7-88dd-4c24-8cd1-13506d4ed361)
+![image](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/52b1d27c-5a21-4811-b08d-4cbe5bd4e3ea)
 
 - The following constraints can be used to get the output from the JA header:
 
@@ -55,10 +59,11 @@ set_property IOSTANDARD LVCMOS33 [get_ports sclk]
 - The connections are made as shown below:
 ![3](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/5487ed13-d428-4187-bd2d-2647bebc2cd2)
 - The output on the oscilloscope is:
-![1](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/4f56da2a-69ba-486c-a215-cb115c9e9b1e)
-![2](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/6ac67149-ddc9-4614-a527-cc8140ab36d3)
+![sine-op-cordic_1](https://github.com/HarshaPraneeth8/cordic_fpga/assets/72025415/9df7a7fd-19c8-4809-a9e4-7dd1ee7660b6)
 
 
+- It is to be noted that the full range of the DAC is not used in this case, The PMOD DA1 is a 8bit DAC, however, due to number represenation formats of the CORDIC IP, to avoid overflow condition, the entire wave is shifted by 128 instead of 256.
+- This results in a resulting output waveform with origin at 0.4v and peak to peak voltage of approximately 0.8v(The range of DAC is from 0 to 1.65V(0 - Vcc/2)
 
 # References
 - PMOD_DA1_ctrlr: https://staff.fysik.su.se/~silver/digsyst/lab7.html
